@@ -18,7 +18,7 @@ func main() {
 
 	// Iterate over the map
 	for key, value := range student {
-		fmt.Printf("The grade of %s is %d\n", key, value)
+		fmt.Printf("The grade of %s is %d\n", key, value) 
 	}
 
 	// Check if a key exists in the map
