@@ -85,20 +85,20 @@ func main() {
 		Name string
 		Age  int
 	}
-	person := Person{Name: "Alice", Age: 30}
+	// person := Person{Name: "Alice", Age: 30}
 
 	// Struct to JSON
-	jsonBytes, err := json.Marshal(person)
-	if err == nil {
-		fmt.Printf("Struct to JSON: %s\n", jsonBytes)
-	}
+	// jsonBytes, err := json.Marshal(person)
+	// if err == nil {
+	// 	fmt.Printf("Struct to JSON: %s\n", jsonBytes)
+	// }
 
-	// JSON to Struct
-	var personFromJSON Person
-	err = json.Unmarshal(jsonBytes, &personFromJSON)
-	if err == nil {
-		fmt.Printf("JSON to Struct: %+v\n", personFromJSON)
-	} else {
-		fmt.Println("Error converting JSON to struct:", err)
-	}
+	// // JSON to Struct
+	// var personFromJSON Person
+	// err = json.Unmarshal(jsonBytes, &personFromJSON)
+	// if err == nil {
+	// 	fmt.Printf("JSON to Struct: %+v\n", personFromJSON)
+	// } else {
+	// 	fmt.Println("Error converting JSON to struct:", err)
+	// }
 }

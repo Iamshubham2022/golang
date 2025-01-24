@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+    "fmt"
+    "reflect"
+)
 
 //In go lang ther is no while loop and do while loop, only for loop,
 //you can perform all the opration of while loop in for loop,
@@ -185,17 +188,17 @@ for i := 10; i >= 0; i-- {
 // Use dynamic conditions to control loop execution.
 
 
-i := 0
-for i*i < 100 {
-    fmt.Println(i)
-    i++
-}
+// i := 0
+// for i*i < 100 {
+//     fmt.Println(i)
+//     i++
+// }
 
 // 10. Iterating Over Struct Fields (Indirectly):
 // Use reflection to iterate over fields of a struct.
 
 
-import "reflect"
+// import 
 
 type Person struct {
     Name string
