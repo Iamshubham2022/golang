@@ -39,6 +39,8 @@ func main() {
 	}
 	fmt.Println("JSON data is saved as json", string(studData))
 
+
+	
 	// Unmarshaling JSON data to a struct...
 	// Note: Unmarshal function converts the JSON object into a given struct.
     // It returns the number of fields successfully unmarshaled.
