@@ -39,7 +39,6 @@ type User struct {
 		Bs          string `json:"bs"`
 	} `json:"company"`
 }
-
 // Get request to get information from the API
 func Getreuestring() {
 
@@ -94,7 +93,6 @@ func Getreuestring() {
 }
 
 //post method for updation of API
-
 func PostMethod() {
 	todo := Todo{
 		UserId:    2,
@@ -143,10 +141,56 @@ func PostMethod() {
 
 }
 
+//update the status by using PUT method
+func updateStatus(){
+	todo := Todo{
+		UserId:    2678,
+		Id:        1,
+		Title:     "shubh jai",
+		Completed: true,
+	}
+
+	// Convert Todo struct to JSON format
+	jsonData, err := json.Marshal(todo)
+	if err != nil {
+		fmt.Println("Error marshaling todo:", err)
+		return
+	}
+	jsonString := string(jsonData)
+	jsonReader := strings.NewReader(jsonString)
+
+	myUrl := "https://jsonplaceholder.typicode.com/todos/1"
+
+	req,err:=http.NewRequest("PUT", myUrl, jsonReader)
+	if err != nil {
+		fmt.Println("Error creating PUT request:", err)
+        return
+    }
+	req.Header.Set("Content-Type", "application/json")
+
+	client := &http.Client{Timeout: 30 * time.Second}
+	res,err:=client.Do(req)
+	if err!= nil {
+        fmt.Println("Error sending PUT request:", err)
+        return
+    }
+	defer res.Body.Close()
+
+	bodyData,err:=io.ReadAll(res.Body)
+	if err!= nil {
+        fmt.Println("Error reading response:", err)
+        return
+    }
+	fmt.Println("Response status:", res.Status)
+	fmt.Println("Response body:", string(bodyData))
+
+}
+
 func main() {
 	fmt.Println("Learning CRUD operations through URL...")
 	// Getreuestring()
-	PostMethod()
+	// PostMethod()
+	updateStatus()
 }
 
 //How TLS handle
