@@ -97,43 +97,49 @@ func Getreuestring() {
 
 func PostMethod() {
 	todo := Todo{
-		UserId:    2101060,
+		UserId:    2,
 		Id:        1,
 		Title:     "shubh jai",
-		Completed: false,
+		Completed: true,
 	}
 
-	//convert todo struct to json formate
+	// Convert Todo struct to JSON format
 	jsonData, err := json.Marshal(todo)
 	if err != nil {
-		fmt.Println("Error marshaling todo", err)
+		fmt.Println("Error marshaling todo:", err)
 		return
 	}
-	fmt.Println("json data is:", string(jsonData))
+	fmt.Println("JSON data is:", string(jsonData))
 
-	
-	myUrl := "https://jsonplaceholder.typicode.com/todos/1"
-	
-	josnString := string(jsonData) //convet jsonData into string format
-	//convert json string into reader
-	jsonReader := strings.NewReader(josnString)
+	// API URL for POST request
+	myUrl := "https://jsonplaceholder.typicode.com/todos"
 
+	// Convert JSON to string and create reader
+	jsonString := string(jsonData)
+	jsonReader := strings.NewReader(jsonString)
+
+	// Create HTTP client with increased timeout
 	client := &http.Client{Timeout: 30 * time.Second}
 
+	// Send POST request
 	res, err := client.Post(myUrl, "application/json", jsonReader)
 	if err != nil {
-		fmt.Println("error sending post request:", err)
+		fmt.Println("Error sending POST request:", err)
+		return
+	}
+	defer res.Body.Close()
+
+	// Read response body
+	bodyData, err := io.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println("Error reading response:", err)
 		return
 	}
 
-	defer res.Body.Close()
+	// Print response details
+	fmt.Println("Response status:", res.Status)
 
-	bodyData, err := io.ReadAll(res.Body)
-	if err != nil {
-		fmt.Println("Error reading:", err)
-	}
-	fmt.Println("response status:", res.Status)
-	fmt.Println("the body data which come from the res body is:", bodyData)
+	fmt.Println("Response body:", string(bodyData))
 
 }
 
