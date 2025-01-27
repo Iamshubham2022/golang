@@ -118,7 +118,7 @@ func PostMethod() {
 	//convert json string into reader
 	jsonReader := strings.NewReader(josnString)
 
-	client := &http.Client{Timeout: 10 * time.Second}
+	client := &http.Client{Timeout: 30 * time.Second}
 
 	res, err := client.Post(myUrl, "application/json", jsonReader)
 	if err != nil {
@@ -133,7 +133,7 @@ func PostMethod() {
 		fmt.Println("Error reading:", err)
 	}
 	fmt.Println("response status:", res.Status)
-	fmt.Println("the body data which come from the res body is:", string(bodyData))
+	fmt.Println("the body data which come from the res body is:", bodyData)
 
 }
 
