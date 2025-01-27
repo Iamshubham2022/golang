@@ -1,3 +1,10 @@
+// the go keyword is used to create a goroutine, which is a lightweight, 
+// concurrent thread of execution. Goroutines enable your program to run 
+// tasks concurrently, allowing multiple functions to execute independently
+//  at the same time without blocking each other.
+		
+
+
 package main
 
 import (
