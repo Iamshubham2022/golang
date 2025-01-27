@@ -34,8 +34,8 @@ func main() {
 	// go Subtraction(7, 3)
 	// time.Sleep(2000 * time.Millisecond)
 
-	go printsomthing("hello world")
-
-	printsomthing("main function")
+	
+	// go printsomthing("hello world")
+	// printsomthing("main function")
 
 }
