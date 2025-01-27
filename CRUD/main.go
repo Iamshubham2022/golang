@@ -186,11 +186,37 @@ func updateStatus(){
 
 }
 
+func deleteStatus(){
+	myUrl := "https://jsonplaceholder.typicode.com/todos/1"
+
+	req,err:=http.NewRequest("DELETE", myUrl, nil)
+	if err != nil {
+		fmt.Println("Error creating PUT request:", err)
+        return
+    }
+
+	client := &http.Client{Timeout: 10 * time.Second}
+	res,err:=client.Do(req)
+	if err!= nil {
+        fmt.Println("Error sending DELETE request:", err)
+        return
+    }
+	defer res.Body.Close()
+	bodyData,err:=io.ReadAll(res.Body)
+	if err!= nil {
+        fmt.Println("Error reading response:", err)
+        return
+    }
+	fmt.Println("Response status:", res.Status)
+	fmt.Println("Response body:", string(bodyData))
+}
+
 func main() {
 	fmt.Println("Learning CRUD operations through URL...")
 	// Getreuestring()
 	// PostMethod()
-	updateStatus()
+	// updateStatus()
+	deleteStatus()
 }
 
 //How TLS handle
