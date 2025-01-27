@@ -216,7 +216,7 @@ func main() {
 	// Getreuestring()
 	// PostMethod()
 	// updateStatus()
-	deleteStatus()
+	// deleteStatus()
 }
 
 //How TLS handle
