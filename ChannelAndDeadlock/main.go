@@ -1,9 +1,9 @@
-package main
+// package main
 
-import (
-	"fmt"
-	"sync"
-)
+// import (
+// 	"fmt"
+// 	"sync"
+// )
 
 // func main() {
 // 	fmt.Println("learing channels...")
@@ -121,36 +121,108 @@ import (
 // Agar function me general channel use ho raha hai, toh direct chan int bhi theek hai
 
 // if i put close(mych)  in the recevier channel then that will run infinite time loop
-// and it will not block the program until receiver channel is closed.
+// Agar receiver side for range ch loop use kar raha hai, toh jab tak channel close nahi hota, tab tak woh loop infinite chalta rahega.
+// Closing the channel signals that no more values will be sent.
+/*
+func main() {
+    ch := make(chan int)
+
+    go func() {
+        for val := range ch {
+            fmt.Println(val)
+        }
+        fmt.Println("Receiver finished")
+    }()
+
+    ch <- 5
+    ch <- 6
+    // Channel not closed, receiver will wait indefinitely
+}
+*/
+
+/*
+func main() {
+    ch := make(chan int)
+
+    go func() {
+        for val := range ch {
+            fmt.Println(val)
+        }
+        fmt.Println("Receiver finished")
+    }()
+
+    ch <- 5
+    ch <- 6
+    close(ch) // Now the loop will stop
+}
+*/
+
 // for resolving this issue we will use <-chan and chan<- key
 
-func main() {
-	fmt.Println("Learning channels...")
+// func main() {
+// 	fmt.Println("Learning channels...")
 
-	mych := make(chan int) // Unbuffered channel
-	wg := &sync.WaitGroup{}
+// 	mych := make(chan int) // Unbuffered channel
+// 	wg := &sync.WaitGroup{}
 
-	wg.Add(2)
+// 	wg.Add(2)
 
-	// Receive channel: Continuous listening until channel is closed
-	go func(ch <-chan int, wg *sync.WaitGroup) {
-		defer wg.Done()
-		for val := range ch { // Loop until channel is closed
-			fmt.Println("Received:", val)
-		}
-		fmt.Println("Receiver Goroutine Exiting...")
-	}(mych, wg)
+// 	// Receive channel: Continuous listening until channel is closed
+// 	go func(ch <-chan int, wg *sync.WaitGroup) {
+// 		defer wg.Done()
+// 		for val := range ch { // Loop until channel is closed
+// 			fmt.Println("Received:", val)
+// 		}
+// 		fmt.Println("Receiver Goroutine Exiting...")
+// 	}(mych, wg)
 
-	// Send channel: Sends multiple values and then closes the channel
-	go func(ch chan<- int, wg *sync.WaitGroup) {
-		defer wg.Done()
-		ch <- 5
-		ch <- 6
-		ch <- 7
-		close(ch) // Closing channel after sending all values
-		fmt.Println("Sender Goroutine Exiting...")
-	}(mych, wg)
+// 	// Send channel: Sends multiple values and then closes the channel
+// 	go func(ch chan<- int, wg *sync.WaitGroup) {
+// 		defer wg.Done()
+// 		ch <- 5
+// 		ch <- 6
+// 		ch <- 7
+// 		close(ch) // Closing channel after sending all values
+// 		fmt.Println("Sender Goroutine Exiting...")
+// 	}(mych, wg)
 
-	wg.Wait()
-	fmt.Println("Main function Exiting...")
-}
+// 	wg.Wait()
+// 	fmt.Println("Main function Exiting...")
+// }
+
+
+// func main() {
+// 	fmt.Println("Learning channels...")
+
+// 	mych := make(chan int,1)
+// 	wg := &sync.WaitGroup{}
+
+// 	wg.Add(2)
+
+// 	// Receive channel: 
+// 	go func(ch <-chan int, wg *sync.WaitGroup) {
+// 		defer wg.Done()
+// 		val,ischannelOpen := <-ch
+// 		if ischannelOpen {
+// 			fmt.Println(ischannelOpen)
+// 			fmt.Println("Received:", val)
+// 		} else {
+// 			fmt.Println(ischannelOpen)
+// 			fmt.Println("Channel is closed.")
+// 		}
+// 		fmt.Println(<-ch)
+// 	}(mych, wg)
+
+// 	// Send channel: 
+// 	go func(ch chan<- int, wg *sync.WaitGroup) {
+// 		defer wg.Done()
+// 		// ch <- 0
+// 		// ch <- 0
+// 		close(ch) 
+// 		fmt.Println("Sender Goroutine Exiting...")
+// 	}(mych, wg)
+
+// 	wg.Wait()
+// 	fmt.Println("Main function Exiting...")
+
+// }
