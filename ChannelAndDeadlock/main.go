@@ -158,6 +158,7 @@ func main() {
 */
 
 // for resolving this issue we will use <-chan and chan<- key
+//   otherwise that will work as bidirectional receiver as well as sender
 
 // func main() {
 // 	fmt.Println("Learning channels...")
